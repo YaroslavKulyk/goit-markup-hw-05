@@ -15,6 +15,9 @@
   --header-bottom-line: #ececec;
   --button-box-shadow: rgba(0, 0, 0, 0.15);
   --svg-icon-color: #afb1b8;
+  --anima-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --spec-bg-color: rgba(47, 48, 58, 0.8);
+  --projects-thumb-overlay: rgba(33, 150, 243, 0.9);
 }
 
 /* general styles */
@@ -93,6 +96,8 @@ body {
 
 .nav .link {
   display: block;
+  position: relative;
+
   padding-top: 32px;
   padding-bottom: 32px;
 
@@ -100,6 +105,24 @@ body {
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color 250ms var(--anima-timing);
+}
+
+.nav .link::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: calc(100% - 4px);
+  left: 0;
+
+  height: 4px;
+  width: 100%;
+
+  background-color: var(--accent-color);
+  border-radius: 4px;
+
+  opacity: 0;
 }
 
 .contacts {
@@ -115,6 +138,8 @@ body {
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color 250ms var(--anima-timing);
 }
 
 .contacts .icon {
@@ -129,8 +154,10 @@ body {
   color: var(--accent-color);
 }
 
-.nav .link.current {
+.nav .link.current,
+.nav .link.current::after {
   color: var(--accent-color);
+  opacity: 1;
 }
 
 .logo {
@@ -270,6 +297,27 @@ h3 {
 .spec img {
   display: block;
 }
+.spec-item-thumb {
+  position: relative;
+}
+.spec-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 70px;
+  padding: 27px;
+  text-align: center;
+  background-color: var(--spec-bg-color);
+}
+
+.spec-text {
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 1.14;
+}
 
 /* Наша команда */
 .team {
@@ -332,6 +380,8 @@ h3 {
   width: 44px;
   height: 44px;
   border-radius: 50%;
+
+  transition: background-color 250ms var(--anima-timing);
 }
 
 .social-link:hover,
@@ -343,6 +393,8 @@ h3 {
   width: 20px;
   height: 20px;
   fill: var(--svg-icon-color);
+
+  transition: fill 250ms var(--anima-timing);
 }
 
 .social-link:hover .icon,
@@ -364,10 +416,14 @@ h3 {
   height: 90px;
   border: 1px solid var(--svg-icon-color);
   border-radius: 4px;
+
+  transition: border-color 250ms var(--anima-timing);
 }
 
 .clients-link .icon {
   fill: var(--svg-icon-color);
+
+  transition: fill 250ms var(--anima-timing);
 }
 
 .clients-link:hover,
@@ -474,6 +530,9 @@ h3 {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.62;
+
+  transition: background 250ms var(--anima-timing),
+    color 250ms var(--anima-timing), box-shadow 250ms var(--anima-timing);
 }
 
 .filter.button:hover,
@@ -502,6 +561,12 @@ h3 {
 
 .projects .item {
   margin: 15px;
+}
+
+.projects .link {
+  display: block;
+
+  transition: box-shadow 250ms var(--anima-timing);
 }
 
 .projects .link:hover,
@@ -533,12 +598,38 @@ h3 {
   line-height: 1.87;
 }
 
+.projects-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.projects-description {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  background-color: var(--projects-thumb-overlay);
+
+  padding: 63px 24px;
+
+  transition: transform 250ms var(--anima-timing);
+}
+
+.projects .link:hover .projects-description,
+.projects .link:focus .projects-description {
+  transform: translateY(-100%);
+}
+
+.projects .projects-description-text {
+  font-size: 18px;
+  line-height: 1.56;
+  color: var(--white);
+}
+
 .projects img {
   display: block;
   max-width: 100%;
   height: auto;
-}
-
-.projects .link {
-  display: block;
 }
